@@ -1,0 +1,94 @@
+:root{
+  --bg:#0b0f14;
+  --panel:#0f1720;
+  --muted:#9aa3b2;
+  --card:#0b1116;
+  --accent:#2563EB; /* blue */
+  --btn-grad: linear-gradient(90deg,#3b82f6,#2563EB);
+  --radius:10px;
+  --glass: rgba(255,255,255,0.02);
+  
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#e6eef8}
+a{color:inherit;text-decoration:none}
+
+.topbar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.03)}
+.logo-row{display:flex;align-items:center;gap:10px}
+.logo-box{width:36px;height:36;display:flex;align-items:center;justify-content:center}
+.brand{font-weight:600;color:#cfe3ff}
+
+.right{display:flex;align-items:center;gap:14px}
+.user{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;font-weight:600;color:#cfe3ff}
+.signout{padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+.main{max-width:980px;margin:28px auto;padding:0 18px;flex:1}
+.hero{text-align:center;margin-bottom:18px}
+.badge{display:inline-block;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:600;margin-bottom:12px}
+h1{font-size:36px;margin:6px 0;color:#fff}
+.lead{color:var(--muted);max-width:760px;margin:0 auto 18px}
+
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+.upload-card{max-width:760px;margin:0 auto;padding:28px}
+
+.file-label{display:block;margin-bottom:14px}
+.label-title{font-weight:600;margin-bottom:8px;color:var(--muted)}
+
+.file-drop{display:flex;align-items:center;gap:14px;padding:18px;border-radius:10px;border:1px dashed rgba(255,255,255,0.04);background:rgba(255,255,255,0.01);position:relative}
+.file-drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file-icon{width:44px;height:44;border-radius:8px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-size:20px}
+.file-info{flex:1}
+.file-name{font-weight:700;color:#e6eef8}
+.hint{font-size:13px;color:var(--muted)}
+
+.actions{display:flex;justify-content:center;margin-top:14px}
+.btn{padding:12px 18px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.primary{background:var(--btn-grad);color:white;box-shadow:0 10px 30px rgba(37,99,235,0.18)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+.features{display:flex;gap:18px;margin-top:26px;justify-content:center}
+.feature{background:rgba(255,255,255,0.02);padding:22px;border-radius:10px;min-width:180px;text-align:center}
+.feature .ftitle{font-weight:700;margin-top:8px}
+.feature .fdesc{color:var(--muted);font-size:13px;margin-top:6px}
+
+.footer{text-align:center;padding:18px 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:40px}
+
+/* login page tweaks */
+.login-page{display:flex;align-items:center;justify-content:center;height:100vh}
+.login-main{width:100%;max-width:420px;padding:18px}
+.login-card input{width:100%;padding:12px;margin-top:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:#e6eef8}
+.login-card .muted{color:var(--muted)}
+
+/* success card overlay */
+.success-card{position:fixed;right:28px;bottom:28px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:10px;display:flex;gap:12px;align-items:center;border:1px solid rgba(255,255,255,0.03);min-width:320px}
+.success-card .sc-left{width:48px;height:48;border-radius:10px;background:var(--btn-grad);display:flex;align-items:center;justify-content:center;font-weight:900}
+.success-card.hidden{display:none}
+
+@media (max-width:720px){
+  .features{flex-direction:column;align-items:center}
+  h1{font-size:28px}
+  .main{padding:0 12px}
+}
+
+
+.tokens {
+  color: #2563eb;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+
+
+.token-alert {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px 20px;
+  border-radius: 10px;
+  font-weight: 500;
+  text-align: center;
+  display: none;
+}
+.token-alert.show { display: block; }
+.token-alert.yellow { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+.token-alert.red { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }

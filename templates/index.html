@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zistal — PDF Splitter</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="dark">
+  <header class="topbar">
+    <div class="left">
+      <div class="logo-row">
+        <div class="logo-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect rx="5" width="24" height="24" fill="#2563EB"/><path d="M6 7h12L6 17h12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="brand">Zistal</div>
+      </div>
+    </div>
+    <div class="right">
+
+      <!-- ---------------------------- -->
+<div class="right">
+  <!-- <div class="user">{{ user }}</div> -->
+  <div class="tokens">💎 Tokens: {{ tokens }}</div>
+  <!-- <a href="/logout" id="signout" class="signout">Sign out</a> -->
+</div>
+<!-- ______________________________ -->
+
+      <div class="user">vishal</div>
+      <a href="/logout" id="signout" class="signout">Sign out</a>
+
+    </div>
+  </header>
+
+<div id="tokenAlert" class="token-alert hidden">
+  <h3 id="tokenTitle">⚠ Token Warning</h3>
+  <p id="tokenMessage">Please recharge your tokens to continue. Email us at <b>zistal@gmail.com</b>.</p>
+</div>
+
+
+
+  <main class="main">
+    <div class="hero">
+      <div class="badge">✨ Smart PDF Processing</div>
+      <h1>PDF Splitter</h1>
+      <p class="lead">Upload a multi-page PDF and an Excel file with names. Each PDF page will be saved as a separate file with the corresponding name from your spreadsheet.</p>
+    </div>
+
+    <section class="card upload-card">
+
+<!-- <form id="convertForm" method="POST" enctype="multipart/form-data">
+  <label>PDF Document</label>
+  <input type="file" id="pdfInput" name="pdf" accept="application/pdf" required>
+  
+  <label>Excel File</label>
+  <input type="file" id="excelInput" name="excel" accept=".xlsx,.xls" required>
+  
+  <button type="submit" id="convertBtn" class="btn primary">Convert & Download ZIP</button>
+</form> -->
+
+
+
+      <form id="convertForm" class="form" method="POST" enctype="multipart/form-data" action="/convert">
+        <label class="file-label">
+          <div class="label-title">PDF Document</div>
+          <div class="file-drop" id="pdfDrop">
+            <div class="file-icon">📄</div>
+            <div class="file-info">
+              <div class="file-name" id="pdfName">Choose PDF file</div>
+              <div class="hint">or drag and drop here</div>
+            </div>
+            <input type="file" id="pdfInput" name="pdf" accept="application/pdf" required />
+          </div>
+        </label>
+
+        <label class="file-label">
+          <div class="label-title">Excel File (xlsx)</div>
+          <div class="file-drop" id="excelDrop">
+            <div class="file-icon">📄</div>
+            <div class="file-info">
+              <div class="file-name" id="excelName">Choose Excel file</div>
+              <div class="hint">or drag and drop here</div>
+            </div>
+            <input type="file" id="excelInput" name="excel" accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required />
+          </div>
+        </label>
+
+
+        <div class="actions">
+          <button type="submit" id="convertBtn" class="btn primary">Convert & Download ZIP</button>
+
+        </div>
+      </form>
+    </section>
+
+  
+
+
+    <section class="features">
+      <div class="feature">⚡<div class="ftitle">Lightning Fast</div><div class="fdesc">Process hundreds of pages in seconds</div></div>
+      <div class="feature">🔒<div class="ftitle">Secure</div><div class="fdesc">Your files are processed securely</div></div>
+      <div class="feature">📦<div class="ftitle">Organized</div><div class="fdesc">Get all files neatly zipped</div></div>
+    </section>
+  </main>
+
+  <footer class="footer">Made with <span class="heart">❤</span> by Vishal</footer>
+
+  <div id="successCard" class="success-card hidden">
+    <div class="sc-left">✓</div>
+    <div class="sc-right">
+      <h3>Conversion Complete</h3>
+      <p>Your ZIP is ready. Click to download.</p>
+      <div class="sc-actions">
+        <button id="downloadBtn" class="btn primary" disabled>Download ZIP</button>
+        <a id="openLink" class="btn ghost hidden" target="_blank">Open</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/script.js"></script>
+
+  <!-- <script src="{{ url_for('static', filename='theme.js') }}"></script> -->
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tokenCount = Number('{{ tokens }}');
+  const tokenAlert = document.getElementById('tokenAlert');
+  const tokenTitle = document.getElementById('tokenTitle');
+  const tokenMessage = document.getElementById('tokenMessage');
+
+  // Show warning if tokens are low
+  if (tokenCount <= 100) {
+    tokenAlert.classList.add('show', 'red');
+    tokenTitle.textContent = '🚨 Low Token Balance';
+    tokenMessage.innerHTML = `You have only <b>${tokenCount}</b> tokens left. 
+      Please recharge at <b>zistal@gmail.com</b> to continue using PDF services.`;
+  } else if (tokenCount <= 300) {
+    tokenAlert.classList.add('show', 'yellow');
+    tokenTitle.textContent = '⚠ Token Running Low';
+    tokenMessage.innerHTML = `Your current balance is <b>${tokenCount}</b> tokens. 
+      Please recharge soon at <b>zistal@gmail.com</b>.`;
+  }
+});
+</script>
+
+
+
+
+</body>
+</html> 
+
+
+
+
+<!-- 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Zistal - Enhanced with Dark Mode</title>
+  <style>
+    :root {
+      --bg-primary: #f8f9fa;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --border-color: #dadce0;
+      --accent: #1a73e8;
+      --accent-hover: #1765cc;
+      --shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --feature-bg: #f8f9fa;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #1a1a1a;
+      --bg-secondary: #242424;
+      --bg-card: #2a2a2a;
+      --text-primary: #e8eaed;
+      --text-secondary: #9aa0a6;
+      --border-color: #3c4043;
+      --accent: #8ab4f8;
+      --accent-hover: #aecbfa;
+      --shadow: 0 1px 2px 0 rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+      --feature-bg: #2a2a2a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Google Sans', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 500;
+      background: linear-gradient(135deg, #1a73e8, #1557b0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .user-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: var(--text-secondary);
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg-primary);
+      transform: rotate(180deg);
+      box-shadow: var(--shadow);
+    }
+
+    .theme-toggle .sun-icon {
+      display: block;
+    }
+
+    .theme-toggle .moon-icon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-toggle .sun-icon {
+      display: none;
+    }
+
+    [data-theme="dark"] .theme-toggle .moon-icon {
+      display: block;
+    }
+
+    .user-email {
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      background: var(--bg-primary);
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .logout-btn {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .logout-btn:hover {
+      background: var(--bg-primary);
+      border-color: var(--border-color);
+    }
+
+    .container {
+      flex: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      width: 100%;
+    }
+
+    .hero-section {
+      text-align: center;
+      margin-bottom: 48px;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.1), rgba(21, 87, 176, 0.1));
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--accent);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lead {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .upload-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      transition: all 0.3s ease;
+    }
+
+    .upload-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .file-input-group {
+      display: grid;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    .file-label {
+      display: block;
+    }
+
+    .label-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .file-input-display {
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--bg-primary);
+    }
+
+    .file-input-display:hover {
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+      transform: scale(1.01);
+    }
+
+    .file-icon {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--accent), #1557b0);
+      border-radius: 12px;
+      color: white;
+    }
+
+    .file-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .file-name {
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .file-hint {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    .convert-btn {
+      background: linear-gradient(135deg, var(--accent), #1557b0);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px 32px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 auto;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    }
+
+    .convert-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(26, 115, 232, 0.4);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .feature-item {
+      background: var(--feature-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+
+    .feature-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .feature-item h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .feature-item p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      .user-email {
+        display: none;
+      }
+      
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-section">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+          <rect width="48" height="48" rx="8" fill="url(#gradient1)"/>
+          <path d="M24 12L34 18V30L24 36L14 30V18L24 12Z" fill="white" opacity="0.95"/>
+          <path d="M24 20L29 23V29L24 32L19 29V23L24 20Z" fill="url(#gradient2)"/>
+          <defs>
+            <linearGradient id="gradient1" x1="0" y1="0" x2="48" y2="48">
+              <stop offset="0%" stop-color="#1a73e8"/>
+              <stop offset="100%" stop-color="#1557b0"/>
+            </linearGradient>
+            <linearGradient id="gradient2" x1="19" y1="20" x2="29" y2="32">
+              <stop offset="0%" stop-color="#1a73e8"/>
+              <stop offset="100%" stop-color="#1557b0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Zistal</span>
+      </div>
+      
+      <div class="user-section">
+        <button class="theme-toggle" id="themeToggle">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <span class="user-email">Vishal</span>
+        <a href="/logout" class="logout-btn">Sign out</a>
+
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="hero-section">
+      <div class="hero-badge">✨ Smart PDF Processing</div>
+      <h1>PDF Splitter</h1>
+      <p class="lead">Upload a multi-page PDF and an Excel file with names. Each PDF page will be saved as a separate file with the corresponding name from your spreadsheet.</p>
+    </div>
+
+    <div class="upload-card">
+      <form>
+        <div class="file-input-group">
+          <label class="file-label">
+            <span class="label-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              PDF Document
+            </span>
+            <div class="file-input-display">
+              <div class="file-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+              </div>
+              <div class="file-text">
+                <span class="file-name">Choose PDF file</span>
+                <span class="file-hint">or drag and drop here</span>
+              </div>
+            </div>
+          </label>
+
+          <label class="file-label">
+            <span class="label-text">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              Excel File (.xlsx)
+            </span>
+            <div class="file-input-display">
+              <div class="file-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                </svg>
+              </div>
+              <div class="file-text">
+                <span class="file-name">Choose Excel file</span>
+                <span class="file-hint">or drag and drop here</span>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <button type="button" class="convert-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="8 17 12 21 16 17"></polyline>
+            <line x1="12" y1="12" x2="12" y2="21"></line>
+            <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
+          </svg>
+          <span>Convert & Download ZIP</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Process hundreds of pages in seconds</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <h3>Secure</h3>
+        <p>Your files are processed securely</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📦</div>
+        <h3>Organized</h3>
+        <p>Get all files neatly zipped</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>Made with ❤️ by Vishal</p>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    let currentTheme = 'light';
+
+    themeToggle.addEventListener('click', () => {
+      currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', currentTheme);
+    });
+  </script>
+</body>
+</html> -->

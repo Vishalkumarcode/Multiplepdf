@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sign in - Zistal</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="dark login-page">
+  <main class="login-main">
+    <div class="login-card card">
+      <div class="logo-row">
+        <div class="logo-box"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"><rect rx="5" width="24" height="24" fill="#2563EB"/><path d="M6 7h12L6 17h12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="brand">Zistal</div>
+      </div>
+      <h2>Sign in</h2>
+      <!-- <p class="muted">Use demo credentials: vishal / 1234</p> -->
+      <p class="muted">Use Your credentials To Login</p>
+      <form id="loginForm">
+        <input id="username" placeholder="username" required value="" />
+        <input id="password" type="password" placeholder="password" required value="" />
+        <div style="height:10px"></div>
+        <button id="signInBtn" class="btn primary">Sign in</button>
+        <div id="error" class="muted" style="margin-top:10px;color:#ffb4b4"></div>
+      </form>
+    </div>
+  </main>
+  <script src="/static/login.js"></script>
+</body>
+</html>
