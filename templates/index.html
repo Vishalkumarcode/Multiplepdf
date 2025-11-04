@@ -101,6 +101,176 @@
     </section>
   </main>
 
+<!-- 🧩 Zistal Pricing Section -->
+<section class="pricingz-section">
+  <h2 class="pricingz-title">Choose Your Plan</h2>
+
+  <div class="pricingz-toggle">
+    <span>🇮🇳 Indian Pricing</span>
+    <label class="pricingz-switch">
+      <input type="checkbox" id="pricingz-toggle">
+      <span class="pricingz-slider round"></span>
+    </label>
+    <span>🇺🇸 USA Pricing</span>
+  </div>
+
+  <div class="pricingz-cards">
+    <div class="pricingz-card">
+      <h3>Starter</h3>
+      <p class="pricingz-price" data-india="₹400" data-usa="$5">₹400</p>
+      <p class="pricingz-tokens" data-india="1250 Tokens" data-usa="1500 Tokens">1250 Tokens</p>
+      <button class="pricingz-btn">Get Started</button>
+    </div>
+
+    <div class="pricingz-card pricingz-highlight">
+      <h3>Pro</h3>
+      <p class="pricingz-price" data-india="₹1000" data-usa="$12">₹1000</p>
+      <p class="pricingz-tokens" data-india="3400 Tokens" data-usa="4000 Tokens">3400 Tokens</p>
+      <button class="pricingz-btn">Best Value</button>
+    </div>
+
+    <div class="pricingz-card">
+      <h3>Unlimited</h3>
+      <p class="pricingz-price" data-india="₹2500 / 4hr | ₹5000 / 2 days" data-usa="$30 / 4hr | $60 / 2 days">
+        ₹2500 / 4hr<br>₹5000 / 2 days
+      </p>
+      <p class="pricingz-tokens" data-india="Unlimited Access" data-usa="Unlimited Access">Unlimited Access</p>
+      <button class="pricingz-btn">Go Unlimited</button>
+    </div>
+  </div>
+</section>
+
+<!-- 🧩 Zistal Pricing Styles -->
+<style>
+  .pricingz-section {
+    text-align: center;
+    margin: 60px auto;
+    padding: 50px 25px;
+    background: #1e293b;
+    color: #f8fafc;
+    border-radius: 24px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    max-width: 1000px;
+  }
+
+  .pricingz-title {
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    color: #60a5fa;
+    font-weight: 700;
+  }
+
+  .pricingz-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .pricingz-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 26px;
+  }
+
+  .pricingz-switch input { display: none; }
+
+  .pricingz-slider {
+    position: absolute;
+    cursor: pointer;
+    background-color: #475569;
+    border-radius: 34px;
+    transition: .4s;
+    top: 0; left: 0; right: 0; bottom: 0;
+  }
+
+  .pricingz-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #f8fafc;
+    border-radius: 50%;
+    transition: .4s;
+  }
+
+  .pricingz-switch input:checked + .pricingz-slider { background-color: #2563eb; }
+  .pricingz-switch input:checked + .pricingz-slider:before { transform: translateX(26px); }
+
+  .pricingz-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
+
+  .pricingz-card {
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 18px;
+    width: 280px;
+    padding: 35px 25px;
+    transition: 0.3s ease;
+  }
+
+  .pricingz-card:hover {
+    transform: translateY(-8px);
+    border-color: #60a5fa;
+    box-shadow: 0 0 15px rgba(96,165,250,0.3);
+  }
+
+  .pricingz-highlight {
+    border-color: #2563eb;
+    background: linear-gradient(145deg, #1e3a8a, #1e40af);
+  }
+
+  .pricingz-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  .pricingz-tokens {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+
+  .pricingz-btn {
+    background: #2563eb;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s ease;
+  }
+
+  .pricingz-btn:hover {
+    background: #1d4ed8;
+    transform: scale(1.05);
+  }
+</style>
+
+<!-- 🧩 Zistal Pricing Script -->
+<script>
+  document.getElementById('pricingz-toggle').addEventListener('change', function() {
+    const isUSA = this.checked;
+    document.querySelectorAll('.pricingz-price').forEach(el => {
+      el.textContent = isUSA ? el.dataset.usa : el.dataset.india;
+    });
+    document.querySelectorAll('.pricingz-tokens').forEach(el => {
+      el.textContent = isUSA ? el.dataset.usa : el.dataset.india;
+    });
+  });
+</script>
+
+
+  
   <footer class="footer">Made with <span class="heart">❤</span> by Zistal-Multipdf</footer>
 
   <div id="successCard" class="success-card hidden">
